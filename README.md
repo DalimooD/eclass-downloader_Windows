@@ -30,7 +30,7 @@
 
 ## 사용 방법
 
-## macOS: `.command` 더블 클릭하여 실행
+## macOS: `eClass_Downloader.command` 더블 클릭하여 실행
 
 혹은 Option + Command로 Spotlight 실행 -> 터미널 입력 후 실행 ->
 
@@ -40,7 +40,7 @@ chmod +x eclass_downloader.command
 eclass_downloader.command
 ```
 
-## Windows: `.bat` 더블 클릭하여 실행
+## Windows: `eClass_Downloader.bat` 더블 클릭하여 실행
 
 혹은 Windows + S -> cmd 입력 후 실행 ->
 
