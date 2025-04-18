@@ -1,0 +1,606 @@
+﻿// CONSTS (상수)
+var CONST_XLEARN_SITE_URL = "https://eclass3.cau.ac.kr/learningx";
+var CONST_CATALOG_SITE_URL = "https://canvas.cau.ac.kr";
+var CONST_HELP_COURSE_ID = 6843;
+var GA_TRACK_ID = 'UA-123263193-1';
+
+$(".ic-Login__innerContent").css({
+    "background" : "rgba(255,255,255,0.6)",
+    "border" : "2px rgba(255,255,255,0.6)",
+});
+
+// 로고를 LearningX의 메인 페이지로 링크 연결
+$(".ic-app-header__logomark").attr("href", CONST_CATALOG_SITE_URL);
+
+// Global Navigation에 이용안내 메뉴 연결
+var helpLang = {
+    'ko': '이용안내',
+    'en': 'Help',
+    'ja': 'ご利用案内',
+    'zh-Hant': '使用指南',
+    'zh-Hans': '使用指南'
+};
+
+var selectedHelpLang = helpLang['en'];
+if (typeof helpLang[ENV.LOCALE]  !== 'undefined') selectedHelpLang = helpLang[ENV.LOCALE];
+
+var helpMenu = 
+    '<li class="menu-item ic-app-header__menu-list-item">' +
+    '<a id="global_nav_profile_link" href="/courses/' + CONST_HELP_COURSE_ID + '" class="ic-app-header__menu-list-link">' +
+    '<div class="menu-item-icon-container" aria-hidden="true">' + 
+    '<img src="' + CONST_XLEARN_SITE_URL + '/customs/canvas/help_icon.png">' +
+    '</div>' +
+    '<div class="menu-item__text">' + selectedHelpLang + '</div>' +
+    '</a>' + 
+    '</li>';
+
+$(".ic-app-header__main-navigation .ic-app-header__menu-list").append(helpMenu);
+
+
+// 과목 내 사용자 및 그룹에서 소속 정보를 표시한다.
+if ($.inArray('teacher', ENV['current_user_roles']) > -1) {
+    
+    $(document).ajaxComplete(function (event, xhr, settings) {
+        if (settings.url.indexOf('/api/v1' + ENV.COURSE_ROOT_URL + '/users?') !== -1 && settings.url.indexOf('include_inactive=true') !== -1) {
+            var lang = {
+                'ko': '학과',
+                'en': 'Department',
+                'ja': '学科',
+                'zh-Hant': '教训',
+                'zh-Hans': '教訓'
+            };
+
+            var selectedLang = lang['en'];
+            if (typeof lang[ENV.LOCALE]  !== 'undefined') selectedLang = lang[ENV.LOCALE];
+
+            var pageIdx = 1;
+            var myRe = /&page=(\d+)/g;
+            var myArray = myRe.exec(settings.url);
+            if (myArray != null) pageIdx = parseInt(myArray[1]);
+
+            if (pageIdx == 1) {
+                $(".roster.ic-Table thead th").eq(3).after("<th>" +selectedLang + "</th>");    
+            }
+
+            var canvasUsers = JSON.parse(xhr.responseText);
+            var loginIds = [];
+
+            for (var i = canvasUsers.length - 1; i >= 0; i--) {
+                var user = canvasUsers[i];
+                loginIds.push(user.login_id);
+
+                $('.collectionViewItems tr').eq(i + (50 * (pageIdx - 1))).find('td').eq(3).after("<td></td>");
+            }
+
+            var courseId = ENV.course.id;
+			var xnToken = document.cookie.split('; ').find(row => row.startsWith('xn_api_token')).split('=')[1];
+
+            $.ajax({
+                type : "GET",
+                url : CONST_XLEARN_SITE_URL + "/api/v1/courses/" + courseId + "/users/detail",
+                headers: {
+                  'Authorization': `Bearer ${xnToken}`,
+                },
+                data : { keywards : loginIds.toString() },
+                dataType : "json",
+                success: function(response) {
+                    $('.collectionViewItems tr').each(function(i) {
+                        var loginId = $(this).find('td').eq(2).text();
+                        loginId = loginId.trim();
+                        
+                        for (var j = 0; j < response.length; j++) {
+                            var user = response[j];
+                            if (loginId != user.user_login) continue;
+
+                            if (!user.dept_name) user.dept_name = '';
+                            $(this).find('td').eq(4).html(user.dept_name);
+                        }
+                    });
+                }
+            });
+        }
+    });
+}
+
+// In Google Analytics you'll need to set up custom dimensions as follows
+// Custom Dimension 1 = Canvas User ID --- Scope = User
+// Custom Dimension 2 = Archived --- Scope = User
+// Custom Dimension 3 = Canvas User Role --- Scope = User
+// Custom Dimension 4 = Canvas Course ID --- Scope = Hit
+// Custom Dimension 5 = Canvas Course Name --- Scope = Hit
+// Custom Dimension 6 = Canvas Sub-Account ID --- Scope = Hit
+
+(function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+    m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+$(document).ready(function () {
+
+    // START - More Google Analytics Tracking Code
+    var sUserId
+    var sUserRole
+    var sTemp // Course ID from URL
+    var _course
+    var sCourseName = null
+    var parent_account //Give you the subaccount_id that the course is in
+
+    ////////////////// CHANGE UA # HERE /////////////////////
+    ga('create', GA_TRACK_ID, 'auto');
+
+    //Get User Information
+    sUserId = ENV["current_user_id"]
+    ga('set', 'dimension1', sUserId);
+
+
+    //Get User Role
+    if ($.inArray('admin', ENV['current_user_roles']) == -1 && $.inArray('teacher', ENV['current_user_roles']) == -1 && $.inArray('student', ENV['current_user_roles']) > -1) {
+        sUserRole = "student"
+    } else if ($.inArray('admin', ENV['current_user_roles']) == -1 && $.inArray('teacher', ENV['current_user_roles']) > -1) {
+        sUserRole = "teacher"
+    } else if ($.inArray('admin', ENV['current_user_roles']) > -1) {
+        sUserRole = "admin"
+    } else {
+        sUserRole = "other"
+    }
+
+    ga('set', 'dimension3', sUserRole);
+
+    //If the user is in a course
+    try {
+        sTemp = window.location.pathname.match(/\/courses\/(\d+)/);
+        if (sTemp[1]) {
+
+            //Get Course information - Course Name and parent sub-account id
+            var d1 = $.get('/api/v1/courses/' + sTemp[1], function (_course) {
+                parent_account = _course.account_id
+                parent_account = parent_account.toString();
+                sCourseName = _course.name
+            });
+
+
+            $.when(d1).done(function (_account) {
+                // ...do stuff...
+                ga('set', 'dimension4', sTemp[1]);
+                ga('set', 'dimension5', sCourseName);
+                ga('set', 'dimension6', parent_account);
+                ga('send', 'pageview');
+            });
+        } else {
+            ga('send', 'pageview');
+        }
+    } catch (err) {}
+
+    // END - Google Analytics Tracking Code
+
+});
+
+$(document).ready(function() {
+    // 퀴즈 미리보기 밑에 안내 문구를 추가한다.
+    try {
+      var courseMatch = window.location.pathname.match(
+        /\/courses\/(\d+)\/quizzes\/(\d+)/
+      );
+  
+      if (courseMatch) {
+        $('.preview_quiz_button > #preview_quiz_button').after('<p style="width:70%;margin: 0 auto;color:#0B7BF9;text-align: left;font-size:14px;margin-top:15px;">※ 하단의 ‘미리보기’버튼은 <u>테스트 학생으로서 풀이해 보는 기능</u>입니다.<br/>이 버튼으로 미리보기를 하는 경우, 가상의 테스트 학생 응시 기록으로 남게 되어 퀴즈 공개 전이라도 학습자의 응시한 기록이 있다는 안내가 표시될 수 있으나, 실제 학생이 풀이한 기록은 아니므로 안심하시기 바랍니다.<br/><br/>만약 테스트 응시 기록을 남기지 않고 확인하고자 하시는 경우 <u>우측 상단의 <b>‘미리보기’</b></u> 기능을 이용하실 수 있습니다.</p>')
+      }
+    } catch (error) {}
+
+    // canvas 사용자 설정 페이지에서 이메일 주소, 연락처 추가하는 버튼을 없앤다.
+    try {
+        if (window.location.pathname === "/profile/settings") {
+            // 이메일이 하나만 있는 경우 이메일 추가 버튼 없애줌
+            $('.single.channel_list.email_channels.ic-Table.ic-Table--condensed > tbody > tr:last-of-type').hide()
+            // 이메일이 두개 이상 있는 경우 이메일 추가 버튼 없애줌
+            $('.channel_list.email_channels.ic-Table.ic-Table--condensed > tbody > tr:last-of-type').hide()
+            // 연락처 추가하는 블록 전체를 없앰
+            $('.channel_list.other_channels.ic-Table.ic-Table--condensed').hide()
+        }
+    } catch (error) {}
+  });
+  
+
+/**
+ * START: 과목 메뉴 > 퀴즈 or 과제 상세보기에 학습활동현황 바로가기 버튼 관련 코드
+ */
+$(document).ready(function() {
+    try {
+        const isQuizDetail = window.location.pathname.match(
+            /\/courses\/(\d+)\/quizzes\/(\d+)$/
+        );
+
+        const isAssignmentDetail = window.location.pathname.match(
+            /\/courses\/(\d+)\/assignments\/(\d+)$/
+        );
+
+        let courseId = null;
+        let assignmentId = null;
+
+        if (!!isQuizDetail && isQuizDetail.length > 0) {
+            courseId = isQuizDetail[1];
+            assignmentId = ENV.QUIZ.assignment_id;
+        }
+
+        if (!!isAssignmentDetail && isAssignmentDetail.length > 0) {
+            courseId = isAssignmentDetail[1];
+            assignmentId = isAssignmentDetail[2];
+        }
+
+        if ((!!isQuizDetail || !!isAssignmentDetail) && !!assignmentId && !!courseId) {
+            const parentElement = document.querySelector('#right-side-wrapper .page-action-list');
+            const isInstructor = !!document.querySelector(".btn.edit_assignment_link");
+
+            if (!!parentElement && !!isInstructor) {
+                const buttonTitleLangs = {
+                    ko: '학습활동현황 바로가기',
+                    en: 'Go to Learning activity',
+                }
+    
+                const redirectToLearningActivityBtn = document.createElement('a');
+                redirectToLearningActivityBtn.href = `/learningx/redirect/courses/${courseId}/external_tools/xinics_learning_activity?learning_activity_target_component_id=${assignmentId}&target=web`;
+                redirectToLearningActivityBtn.innerText = buttonTitleLangs[ENV.LOCALE] || buttonTitleLangs["en"];
+                redirectToLearningActivityBtn.style.borderRadius = "5px";
+                redirectToLearningActivityBtn.style.padding = "8px 16px";
+                redirectToLearningActivityBtn.style.backgroundColor = "rgb(40, 107, 252)";
+                redirectToLearningActivityBtn.style.color = "white";
+    
+                const redirectToLearningActivityBtnContainer = document.createElement('li');
+                redirectToLearningActivityBtnContainer.style.paddingTop = "5px";
+                redirectToLearningActivityBtnContainer.appendChild(redirectToLearningActivityBtn);
+    
+                parentElement.appendChild(redirectToLearningActivityBtnContainer);
+            }
+        }
+    } catch(err) {}
+});
+/**
+ * END: 과목 메뉴 > 퀴즈 or 과제 상세보기에 학습활동현황 바로가기 버튼 관련 코드
+ */
+
+/**
+ * START: 과목 홈, 기존 학기 콘텐츠 복사에 과목 메뉴 정리 기능 관련 코드
+ */
+
+// 해당 함수의 경우 courseId와 운영자 여부를 전달하면, 과목 메뉴 정리 관련 element를 리턴한다.
+// 해당 element를 넣고 싶은 위치에 해당 함수 리턴 값을 append와 같이 화면에 출력할 수 있는 동작을 하면된다.
+function getCourseMenuCleanUpElement(courseId, isInstructor) {
+    if (!courseId || !isInstructor) {
+        return;
+    }
+
+    const xnToken = document.cookie.split('; ').find(row => row.startsWith('xn_api_token')).split('=')[1];
+
+    if (!xnToken) {
+        return;
+    }
+
+    const buttonTitleLangs = {
+        ko: '현재 학기 메뉴 기본값으로 설정',
+        en: 'Set current term menu as default',
+    }
+    const buttonTitle = buttonTitleLangs[ENV.LOCALE] || buttonTitleLangs["en"];
+
+    const cleanUpCourseMenuBtn = document.createElement('button');
+    cleanUpCourseMenuBtn.innerText = buttonTitle;
+    cleanUpCourseMenuBtn.className = "xn-clean_up-course_menu-button";
+
+    function closeModal() {
+        document.body.style.overflow = "auto";
+        const modalOuter = document.querySelector(".xn-clean_up-course_menu-modal-outer");
+        modalOuter.remove();
+    }
+    
+    cleanUpCourseMenuBtn.onclick = function() {
+        const modalOuter = document.createElement("div");
+        modalOuter.className = "xn-clean_up-course_menu-modal-outer";
+        
+        const modal = document.createElement("div");
+        modal.className = "xn-clean_up-course_menu-modal";
+
+        const modalHeader = document.createElement("div");
+        modalHeader.className = "xn-clean_up-course_menu-modal-header";
+        modalHeader.innerHTML = `
+            <span>${buttonTitle}</span>
+            <button id="xn-clean_up-course_menu-modal-close_btn">&#215;</button>
+        `;
+
+        const closeBtn = modalHeader.querySelector("button#xn-clean_up-course_menu-modal-close_btn");
+
+        if (!!closeBtn) {
+            closeBtn.onclick = closeModal;
+        }
+
+        const modalBody = document.createElement("div");
+        modalBody.className = "xn-clean_up-course_menu-modal-body";
+    
+        const modalDescriptionLangs = {
+            ko: `기존과목 콘텐츠 가져오기를 통해 기존 과목 메뉴까지 가져온 경우,<br />
+            아래 메뉴는 새로운 과목에서는 더 이상 사용할 수 없습니다.<br />
+            신규 과목용 메뉴로 재설정해 주시기 바랍니다.<br />`,
+            en: `If an existing course menu has been imported through 'Import Course Content', the menu below will no longer be available in the new course.<br/>
+            Please reset to the menu for the new course.`,
+        }
+
+        const modalDescription = modalDescriptionLangs[ENV.LOCALE] || modalDescriptionLangs["en"];
+
+        const modalListTitleLangs = {
+            ko: "신규 과목 유형에서 사용할 수 없는 메뉴",
+            en: "Menu not available in new courses",
+        }
+        const modalListTitle = modalListTitleLangs[ENV.LOCALE] || modalListTitleLangs["en"];
+
+        const modalListItemsLangs = {
+            ko: `<li>강의콘텐츠 → <b>'주차학습'</b> 메뉴로 대체</li>
+            <li>출결/학습현황 → <b>'출결현황'</b> 메뉴로 대체</li>`,
+            en: `<li>Lecture content → Replaced with <b>'Weekly Learning'</b></li>
+            <li>Learn Status → Replaced with <b>'Attendance'</b> menu</li>`,
+        }
+        const modalListItems = modalListItemsLangs[ENV.LOCALE] || modalListItemsLangs["en"];
+
+        modalBody.innerHTML = `
+            ${modalDescription}
+
+            <div class="xn-clean_up-course_menu-modal-list-container">
+                <p><b>${modalListTitle}</b></p>
+                <ul class="xn-clean_up-course_menu-modal-list">
+                    ${modalListItems}
+                </ul>
+            </div>
+            
+            <div class="xn-clean_up-course_menu-modal-bottom">
+                <button id="xn-clean_up-course_menu-modal-submit_btn">
+                    ${buttonTitle}
+                </button>
+            </div>
+        `;
+
+        const submitBtn = modalBody.querySelector("button#xn-clean_up-course_menu-modal-submit_btn")
+        if (!!submitBtn) {
+            submitBtn.onclick = function() {
+                const confirmLangs = {
+                    ko: "신규 과목용 메뉴로 재설정하시겠습니까",
+                    en: "Are you sure you want to reset to the menu for the new course?",
+                }
+                if (!confirm(confirmLangs[ENV.LOCALE] || confirmLangs["en"])) return;
+                
+                fetch(`/learningx/api/v1/sis_import/courses/${courseId}/lti/execute`, {
+                    "method": "POST",
+                    "headers": {
+                        "Authorization": `Bearer ${xnToken}`,
+                    }
+                })
+                    .then(res => {
+                        if (!res.ok) throw res;
+                
+                        const succeedLangs = {
+                            ko: "신규 과목 메뉴로 재설정되었습니다.",
+                            en: "Course menu reset is complete.",
+                        }
+                        alert(succeedLangs[ENV.LOCALE] || succeedLangs["en"]);
+                        location.reload();
+                    })
+                    .catch(res => {
+                        const errorLangs = {
+                            ko: "오류가 발생하였습니다. 잠시 후 다시 시도해주세요.",
+                            en: "Process failed. Please try again later.",
+                        }
+                        alert(errorLangs[ENV.LOCALE] || errorLangs["en"]);
+                    })
+            };
+        }
+
+        modal.appendChild(modalHeader);
+        modal.appendChild(modalBody);
+
+        modalOuter.appendChild(modal);
+        document.body.appendChild(modalOuter);
+        document.body.style.overflow = "hidden";
+    }
+
+    const cleanUpTooltip = document.createElement("div");
+    cleanUpTooltip.classList = "xn-clean_up-course_menu-tooltip";
+
+    const tooltipTextLangs = {
+        ko: "기존과목 콘텐츠 가져오기를 통해 기존 과목 메뉴까지 가져온 경우 새로운 과목 유형에서 지원하는 메뉴로 재설정해야 합니다.",
+        en: "If you imported the course menu of the last semester through 'Import Course Content', you must reset it to the menu supported by the new course type.",
+    }
+    const tooltipText = tooltipTextLangs[ENV.LOCALE] || tooltipTextLangs["en"];
+
+    cleanUpTooltip.innerText = tooltipText;
+
+    const cleanUpCourseMenuBtnWrapper = document.createElement("div");
+    cleanUpCourseMenuBtnWrapper.className = "xn-clean_up-course_menu-wrapper";
+    cleanUpCourseMenuBtnWrapper.append(cleanUpCourseMenuBtn);
+    cleanUpCourseMenuBtnWrapper.append(cleanUpTooltip);
+
+    return cleanUpCourseMenuBtnWrapper;
+}
+// 과목 홈에 연결하는 부분
+$(document).ready(function() {
+    try {
+        const isCourseHome = window.location.pathname.match(
+            /\/courses\/(\d+)$/
+        );
+
+        let courseId = null;
+
+        if (!!isCourseHome && isCourseHome.length > 0) {
+            courseId = isCourseHome[1];
+        }
+
+        if (!courseId) return;
+        
+        const appendTarget = document.querySelector(".ic-app-nav-toggle-and-crumbs .ic-app-crumbs");
+        const isInstructor = !!document.querySelector("button.choose_home_page_link");
+        const element = getCourseMenuCleanUpElement(courseId, isInstructor);
+
+        if (!!appendTarget && !!isInstructor) {
+            appendTarget.style.justifyContent = "space-between";
+            appendTarget.appendChild(element);
+        }
+    } catch(err) {}
+});
+// 기존 학기 콘텐츠 복사에 연결하는 부분
+$(document).ready(function() {
+    try {
+        const isCourseCopy = window.location.pathname.match(
+            /\/courses\/(\d+)\/content_migrations$/
+        );
+
+        let courseId = null;
+
+        if (!!isCourseCopy && isCourseCopy.length > 0) {
+            courseId = isCourseCopy[1];
+        }
+
+        if (!courseId) return;
+
+        // 해당 페이지에 접근가능하면 운영자이다.
+        const isInstructor = true;
+
+        const element = getCourseMenuCleanUpElement(courseId, isInstructor);
+
+        const appendTarget = document.querySelector(".ic-app-nav-toggle-and-crumbs .ic-app-crumbs");
+
+        if (!!appendTarget && !!isInstructor) {
+            appendTarget.style.justifyContent = "space-between";
+            appendTarget.appendChild(element);
+        }
+        
+        const descriptionAfterTarget = document.querySelector("#migrationConverterContainer > h1");
+
+        const description = document.createElement("div");
+        
+        description.style.borderRadius = "10px";
+        description.style.backgroundColor = "#e5f2fc";
+        description.style.padding = "15px";
+        description.style.marginBottom = "20px";
+
+        const descriptionLangs = {
+            ko: `
+            <p style="margin-top: 0;"><b>과목 복사 요령 3단계</b></p>
+            <div style="margin-bottom: 10px;">
+                <b>● 과목 복사 전<br /></b>
+                　 1. '주차학습' > <b>[주차일괄삭제]</b> 실행
+            </div>
+            <div style="margin-bottom: 10px;">
+                <b>● 과목 복사 후<br /></b>
+                　 1. '홈' > <b>[현재 학기 메뉴 기본값으로 설정]</b> 실행<br/>
+                　 2. '주차학습' > <b>[기존 콘텐츠 가져오기 시 자동 문제해결]</b>을 실행
+            </div>
+            <a href="https://eclass3.cau.ac.kr/courses/6843/pages/23nyeon-1haggi-ijeonyi-gwamog-bogsabangbeob-annae" target="_blank" style="margin-left: 20px;">상세 가이드 보기</a>
+        `,
+            en: `
+            <p style="margin-top: 0;"><b>3 Steps for Importing a Course</b></p>
+            <div style="margin-bottom: 10px;">
+                <b>● Before importing<br /></b>
+                　 1. Click 'Weekly Learning' > <b>[Delete all weeks]</b>
+            </div>
+            <div style="margin-bottom: 10px;">
+                <b>● After importing<br /></b>
+                　 1. Click 'Home' > <b>[Set current term menu as default]</b><br/>
+                　 2. Click 'Weekly Learning' > <b>[Auto problem-solving when importing existing contents]</b>을 실행
+            </div>
+            <a href="https://eclass3.cau.ac.kr/courses/6843/pages/23nyeon-1haggi-ijeonyi-gwamog-bogsabangbeob-annae" target="_blank" style="margin-left: 20px;">View User Guide</a>
+        `,
+        }
+
+        description.innerHTML = descriptionLangs[ENV.LOCALE] || descriptionLangs["en"];;
+
+        descriptionAfterTarget.after(description);
+    } catch(err) {}
+});
+/**
+ * END: 과목 홈, 기존 학기 콘텐츠 복사에 과목 메뉴 정리 기능 관련 코드
+ */
+
+/**
+ * START: 공지 메뉴에 공지 조회 현황 바로가기 버튼 관련 코드
+ */
+$(document).ready(function () {
+    try {
+        const isAnnouncements = window.location.pathname.match(/\/courses\/(\d+)\/announcements$/);
+
+        let courseId = null;
+        if (!!isAnnouncements && isAnnouncements.length > 0) {
+            courseId = isAnnouncements[1];
+        }
+        if (!courseId) return;
+
+        const parentElement = document.querySelector(".announcements-v2__wrapper");
+        if (!parentElement) return;
+
+        const isInstructor = !!parentElement.querySelector("#add_announcement");
+        if (!isInstructor) return;
+
+        const buttonTitleLangs = {
+            ko: "공지 조회 현황",
+            en: "Go to Announcement statistics",
+        };
+
+        const redirectToAnnouncementStatisticsBtn = document.createElement("a");
+        redirectToAnnouncementStatisticsBtn.href = `/learningx/redirect/courses/${courseId}/external_tools/xinics_learningx_board?lx_board_view=announcement_statistics&target=web`;
+        redirectToAnnouncementStatisticsBtn.innerText = buttonTitleLangs[ENV.LOCALE] || buttonTitleLangs["en"];
+        redirectToAnnouncementStatisticsBtn.style.border = "1px solid #005DC6";
+        redirectToAnnouncementStatisticsBtn.style.borderRadius = "5px";
+        redirectToAnnouncementStatisticsBtn.style.padding = "10px 12px";
+        redirectToAnnouncementStatisticsBtn.style.color = "#005DC6";
+		redirectToAnnouncementStatisticsBtn.style.fontSize = "16px";
+		redirectToAnnouncementStatisticsBtn.style.lineHeight = "21.79px";
+
+        const redirectToAnnouncementStatisticsBtnContainer = document.createElement("div");
+        redirectToAnnouncementStatisticsBtnContainer.style.display = "flex";
+        redirectToAnnouncementStatisticsBtnContainer.style.justifyContent = "flex-end";
+        redirectToAnnouncementStatisticsBtnContainer.style.marginTop = "16px";
+        redirectToAnnouncementStatisticsBtnContainer.appendChild(redirectToAnnouncementStatisticsBtn);
+
+        const containerElement = parentElement.querySelectorAll("span")[1];
+        containerElement.appendChild(redirectToAnnouncementStatisticsBtnContainer);
+    } catch (err) {}
+});
+/**
+ * END: 공지 메뉴에 공지 조회 현황 바로가기 버튼 관련 코드
+ */
+
+
+// 교수인 경우에 과목 설정에서 ‘과목 콘텐츠 리셋’, ‘과목 영구 삭제', ‘과목 종료’ 버튼 숨기기
+$(document).ready(function() {
+    var sUserId
+    var sUserRole
+
+    sUserId = ENV["current_user_id"]
+
+    //Get User Role
+    if ($.inArray('admin', ENV['current_user_roles']) == -1 && $.inArray('teacher', ENV['current_user_roles']) == -1 && $.inArray('student', ENV['current_user_roles']) > -1) {
+        sUserRole = "student"
+    } else if ($.inArray('admin', ENV['current_user_roles']) == -1 && $.inArray('teacher', ENV['current_user_roles']) > -1) {
+        sUserRole = "teacher"
+    } else if ($.inArray('admin', ENV['current_user_roles']) > -1) {
+        sUserRole = "admin"
+    } else {
+        sUserRole = "other"
+    }
+
+    try {
+        var isCourseSettingsPage = window.location.pathname.match(
+            /\/courses\/(\d+)\/settings/
+        );
+
+        if (!!isCourseSettingsPage && isCourseSettingsPage.length > 0 && sUserRole === "teacher") {     
+            $(".Button.Button--link.Button--link--has-divider.Button--course-settings").each(function (idx, item) {
+                let TargetItem = $(item).attr('href').match(/(conclude|delete|reset)/)
+                if (!!TargetItem) {
+                    $(item).hide()
+                }
+            })
+        }
+    } catch (error) {}
+});

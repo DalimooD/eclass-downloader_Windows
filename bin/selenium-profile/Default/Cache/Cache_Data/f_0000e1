@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang=ko class="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1">
+    <meta name="csrf-token" content="sMCY8nwfhczXKzPmRqam484AGvLfMIK7QSipDtqo">
+    <script type="text/javascript" nonce="82b6e41fe3114fffaaec029d643" src="//local.adguard.org?ts=1744945197186&amp;type=content-script&amp;dmn=canvas.cau.ac.kr&amp;url=https%3A%2F%2Fcanvas.cau.ac.kr%2Flogin%3Ftype%3Dintegrated&amp;app=chrome.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script>
+<script type="text/javascript" nonce="82b6e41fe3114fffaaec029d643" src="//local.adguard.org?ts=1744945197186&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script><link rel="stylesheet" href="https://canvas.cau.ac.kr/css/index.css?version=5.14.0.2" media="all">
+    <link rel="stylesheet" href="https://canvas.cau.ac.kr/css/front/index.css?version=5.14.0.2" media="all">
+
+             
+        
+        <link rel="stylesheet" href="https://canvas.cau.ac.kr/customs/main/custom.css?v=1732609942" media="all">
+            
+    <link rel="stylesheet" href="https://canvas.cau.ac.kr/lib/bootstrap/4.2.1/bootstrap.min.css">
+    <link rel="stylesheet" href="https://canvas.cau.ac.kr/lib/vector-icons/index.min.css">
+    <script src="https://canvas.cau.ac.kr/js/coursecatalog-bootstrap.js"></script>
+    <script src="https://canvas.cau.ac.kr/lib/bootstrap/4.2.1/bootstrap.bundle.min.js"></script>
+    <script src="https://canvas.cau.ac.kr/js/polyfill.js"></script>
+
+    <script>
+    var MIX_APP_URL = "https://canvas.cau.ac.kr";
+    var API_V1_ENDPOINT = "https://canvas.cau.ac.kr" + "/api/v1";
+</script>
+        
+            <title>중앙대학교 CAU-ON</title>
+    
+    </head>
+<body class="">
+    <!-- header -->
+	<script>
+window.xnSubMenuHelper = {
+    subMenuWrapperHeight: 200,
+
+    // 서브 메뉴를 표시/숨김한다.
+    showHideSubMenuWrapper: function(e, event_name, target_class_name) {
+        e.stopPropagation();
+        if (target_class_name == "xn-header-menu-wrapper") this.mouseoverMenuWrapper = (event_name == "mouseenter");
+        else if (target_class_name == "xn-sub-menu-wrapper") this.mouseoverSubMenuWrapper = (event_name == "mouseenter");
+        xnSubMenuHelper.clearMouseoverSubMenuTimer();
+
+        if (event_name == "mouseenter") {
+            xnSubMenuHelper.setMouseoverSubMenuTimer();
+        } else if (event_name == "mouseleave") {
+            xnSubMenuHelper.setMouseoverSubMenuTimer();
+        }
+    },
+
+    // 서브 메뉴를 표시/숨김 애니메이션을 수행한다.
+    showHideSubMenuAnim: function() {
+        if (!this.mouseoverMenuWrapper && !this.mouseoverSubMenuWrapper) {
+            if ($(".xn-sub-menu-outer-wrapper").css("display") != "block") return;
+
+            $( ".xn-sub-menu-outer-wrapper" )
+            .stop()
+            .animate({
+                "height": "0px"
+            }, 600, function() {
+                $(this).hide();
+            });
+        } else {
+            $( ".xn-sub-menu-outer-wrapper" )
+            .show()
+            .stop()
+            .animate({
+                "height": xnSubMenuHelper.subMenuWrapperHeight + "px"
+            });
+        }
+    },
+
+    // 타이버를 제거한다.
+    clearMouseoverSubMenuTimer: function() {
+        if (this.mouseoverSubMenuTimer != null) clearTimeout(this.mouseoverSubMenuTimer);
+    },
+
+    // 타이머를 수행시킨다.
+    setMouseoverSubMenuTimer: function() {
+        this.mouseoverSubMenuTimer = setTimeout(function() { xnSubMenuHelper.showHideSubMenuAnim(); }, 400);
+    },
+
+    // 서브 메뉴에 마우스 오버하면, 해당 대 메뉴에 hover 효과가 표시된다.
+    onmouseenterSubMenuItemWrapper: function(target) {
+        var index = $(target).index();
+        $($(".xn-header-menu-wrapper #menu-main li").get(index)).find("a").addClass("hover");
+    },
+
+    // 해당 대 메뉴에 hover 효과를 모두 제거한다.
+    onmouseleaveSubMenuItemWrapper: function(target) {
+        $(".xn-header-menu-wrapper #menu-main li").find("a").removeClass("hover");
+    }
+};
+</script>
+
+<!-- header -->
+    <!-- 일반 헤더와 OER 헤더가 분리되어 있다. -->
+                        <!-- header -->
+<script>
+$(document).ready(function() {
+    $('.fs_btn').click(function() {
+        $('.fs_list').toggle();
+    });
+});
+</script>
+<style>
+    #content{padding-top:0;}
+</style>
+<header id="header" class="xnca">
+    <nav class="navbar navbar-light navbar-static-top navbar-expand-md" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="float-left">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="float-left xn-main-catalog-header-logo-wrap">
+                    <a href="https://canvas.cau.ac.kr">
+                        <div class="xn-main-catalog-header-logo">
+                            <img class="xn-main-catalog-header-logo-image" src="https://canvas.cau.ac.kr/customs/main/header_logo.png" />
+                        </div>
+                    </a>
+                </div>
+                <div class="xn-main-menu-wrap">
+                    <div class="desktop">
+                        <div class="xn-header-menu-wrapper">
+                            <ul class="xn-header-menu" id="xn-header-menu">
+                                                                    <li id="menu-item-64df298a3d76063b45734c52" class="menu-item">
+                                        <a href="/search" data-role="menu" >CAU-ON</a>
+                                    </li>
+                                                                    <li id="menu-item-64df29f647b30b01b3734c58" class="menu-item">
+                                        <a href="/opencau/search?text=" data-role="menu" >비교과 e-Class</a>
+                                    </li>
+                                                                    <li id="menu-item-64df2a65962d175f66734c5b" class="menu-item">
+                                        <a href="/dashboard" data-role="menu" >나의 과목</a>
+                                    </li>
+                                                                    <li id="menu-item-64df2ae837f04e419c734c5e" class="menu-item">
+                                        <a href="" data-role="menu" >이용안내</a>
+                                    </li>
+                                                            </ul>
+                        </div>
+
+                        <div class="xn-sub-menu-outer-wrapper">
+                            <div class="xn-sub-menu-wrapper pull-right">
+                                                                    <ul class="xn-sub-menu-item-wrapper" onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);" onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);">
+                                                                                                                <li id="menu-item-64df29b3e438bb3d5e734c53" class="menu-item">
+                                            <a href="/pre-college" data-role="menu" >Pre-college</a>
+                                        </li>
+                                                                            <li id="menu-item-64df29b36fd3b3201a734c54" class="menu-item">
+                                            <a href="/micros" data-role="menu" >미크로스칼리지</a>
+                                        </li>
+                                                                            <li id="menu-item-64df29b32d1a6a7bee734c56" class="menu-item">
+                                            <a href="/micrograduate" data-role="menu" >Micro Graduate</a>
+                                        </li>
+                                                                            <li id="menu-item-673fe1abded2ae7e6e11f2f2" class="menu-item">
+                                            <a href="/cooc" data-role="menu" >COOC</a>
+                                        </li>
+                                                                            <li id="menu-item-64df29b3fadaca77c9734c55" class="menu-item">
+                                            <a href="/gvc" data-role="menu" >Global Campus</a>
+                                        </li>
+                                                                            <li id="menu-item-64df29b3814e434542734c57" class="menu-item">
+                                            <a href="/hurid" data-role="menu" >HuRID</a>
+                                        </li>
+                                                                        </ul>
+                                                                    <ul class="xn-sub-menu-item-wrapper" onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);" onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);">
+                                                                                                                <li id="menu-item-64df2a366d59a82c9b734c59" class="menu-item">
+                                            <a href="/opencau/search?text=" data-role="menu" >비교과 e-Class 목록</a>
+                                        </li>
+                                                                            <li id="menu-item-64df2a36a9e5826cf2734c5a" class="menu-item">
+                                            <a href="/course_opening_applications/user_application_list?catalog_id=642136b625b2494fae247984" data-role="menu" >비교과 e-Class 개설 신청</a>
+                                        </li>
+                                                                        </ul>
+                                                                    <ul class="xn-sub-menu-item-wrapper" onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);" onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);">
+                                                                                                                <li id="menu-item-64df2ab646764629cc734c5c" class="menu-item">
+                                            <a href="/dashboard" data-role="menu" >비정규 강좌 수강</a>
+                                        </li>
+                                                                            <li id="menu-item-64df2ab6ff1da44780734c5d" class="menu-item">
+                                            <a href="/auditor_applications" data-role="menu" >청강생 신청</a>
+                                        </li>
+                                                                        </ul>
+                                                                    <ul class="xn-sub-menu-item-wrapper" onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);" onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);">
+                                                                                                                <li id="menu-item-64df2b4307018d61c8734c5f" class="menu-item">
+                                            <a href="/boards/5d5b4cfe67d6044ab66280e4/posts" data-role="menu" >공지사항</a>
+                                        </li>
+                                                                            <li id="menu-item-64df2ba1622fd765e2734c60" class="menu-item">
+                                            <a href="/boards/5d5b4cfe67d6044ab66280e5/posts" data-role="menu" >이용문의</a>
+                                        </li>
+                                                                        </ul>
+                                                            </div>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                                                    <a class="btn btn-primary btn-login xn-common-blue-btn" type="button" href="https://canvas.cau.ac.kr/login?type=integrated">로그인</a>
+                                            </div>
+                </div>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse mobile" id="bs-example-navbar-collapse-1">
+                <ul class="navbar-nav mr-auto">
+                                            <li id="menu-item-64df298a3d76063b45734c52" class="nav-item xn-1depth-menu-wrap" >
+                            <a href="/search" data-role="menu"  class="xn-1depth-menu" >CAU-ON</a>
+                            <ul onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);" onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);">
+                                                                                        <li id="menu-item-64df29b3e438bb3d5e734c53" class="nav-item xn-2depth-menu-wrap">
+                                    <a href="/pre-college" data-role="menu" class="nav-item xn-2depth-menu" >Pre-college</a>
+                                </li>
+                                                            <li id="menu-item-64df29b36fd3b3201a734c54" class="nav-item xn-2depth-menu-wrap">
+                                    <a href="/micros" data-role="menu" class="nav-item xn-2depth-menu" >미크로스칼리지</a>
+                                </li>
+                                                            <li id="menu-item-64df29b32d1a6a7bee734c56" class="nav-item xn-2depth-menu-wrap">
+                                    <a href="/micrograduate" data-role="menu" class="nav-item xn-2depth-menu" >Micro Graduate</a>
+                                </li>
+                                                            <li id="menu-item-673fe1abded2ae7e6e11f2f2" class="nav-item xn-2depth-menu-wrap">
+                                    <a href="/cooc" data-role="menu" class="nav-item xn-2depth-menu" >COOC</a>
+                                </li>
+                                                            <li id="menu-item-64df29b3fadaca77c9734c55" class="nav-item xn-2depth-menu-wrap">
+                                    <a href="/gvc" data-role="menu" class="nav-item xn-2depth-menu" >Global Campus</a>
+                                </li>
+                                                            <li id="menu-item-64df29b3814e434542734c57" class="nav-item xn-2depth-menu-wrap">
+                                    <a href="/hurid" data-role="menu" class="nav-item xn-2depth-menu" >HuRID</a>
+                                </li>
+                                                        </ul>
+                        </li>
+                                            <li id="menu-item-64df29f647b30b01b3734c58" class="nav-item xn-1depth-menu-wrap" >
+                            <a href="/opencau/search?text=" data-role="menu"  class="xn-1depth-menu" >비교과 e-Class</a>
+                            <ul onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);" onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);">
+                                                                                        <li id="menu-item-64df2a366d59a82c9b734c59" class="nav-item xn-2depth-menu-wrap">
+                                    <a href="/opencau/search?text=" data-role="menu" class="nav-item xn-2depth-menu" >비교과 e-Class 목록</a>
+                                </li>
+                                                            <li id="menu-item-64df2a36a9e5826cf2734c5a" class="nav-item xn-2depth-menu-wrap">
+                                    <a href="/course_opening_applications/user_application_list?catalog_id=642136b625b2494fae247984" data-role="menu" class="nav-item xn-2depth-menu" >비교과 e-Class 개설 신청</a>
+                                </li>
+                                                        </ul>
+                        </li>
+                                            <li id="menu-item-64df2a65962d175f66734c5b" class="nav-item xn-1depth-menu-wrap" >
+                            <a href="/dashboard" data-role="menu"  class="xn-1depth-menu" >나의 과목</a>
+                            <ul onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);" onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);">
+                                                                                        <li id="menu-item-64df2ab646764629cc734c5c" class="nav-item xn-2depth-menu-wrap">
+                                    <a href="/dashboard" data-role="menu" class="nav-item xn-2depth-menu" >비정규 강좌 수강</a>
+                                </li>
+                                                            <li id="menu-item-64df2ab6ff1da44780734c5d" class="nav-item xn-2depth-menu-wrap">
+                                    <a href="/auditor_applications" data-role="menu" class="nav-item xn-2depth-menu" >청강생 신청</a>
+                                </li>
+                                                        </ul>
+                        </li>
+                                            <li id="menu-item-64df2ae837f04e419c734c5e" class="nav-item xn-1depth-menu-wrap" >
+                            <a href="" data-role="menu"  class="xn-1depth-menu" >이용안내</a>
+                            <ul onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);" onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);">
+                                                                                        <li id="menu-item-64df2b4307018d61c8734c5f" class="nav-item xn-2depth-menu-wrap">
+                                    <a href="/boards/5d5b4cfe67d6044ab66280e4/posts" data-role="menu" class="nav-item xn-2depth-menu" >공지사항</a>
+                                </li>
+                                                            <li id="menu-item-64df2ba1622fd765e2734c60" class="nav-item xn-2depth-menu-wrap">
+                                    <a href="/boards/5d5b4cfe67d6044ab66280e5/posts" data-role="menu" class="nav-item xn-2depth-menu" >이용문의</a>
+                                </li>
+                                                        </ul>
+                        </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+            
+<script>
+$(document).ready(function() {
+    if ($(".xn-sub-menu-item-wrapper").length == 0) return;
+
+    // 메뉴 영역이 아니면, 서브메뉴를 숨긴다.
+    $(".xn-header-menu-wrapper").bind("mouseenter", function(e) {
+        xnSubMenuHelper.showHideSubMenuWrapper(e, "mouseenter", "xn-header-menu-wrapper");
+    });
+    $(".xn-header-menu-wrapper").on("mouseleave", function(e) {
+        xnSubMenuHelper.showHideSubMenuWrapper(e, "mouseleave", "xn-header-menu-wrapper");
+    });
+
+    $(".xn-sub-menu-wrapper").on("mouseenter", function(e) {
+        xnSubMenuHelper.showHideSubMenuWrapper(e, "mouseenter", "xn-sub-menu-wrapper");
+    });
+    $(".xn-sub-menu-wrapper").on("mouseleave", function(e) {
+        xnSubMenuHelper.showHideSubMenuWrapper(e, "mouseleave", "xn-sub-menu-wrapper");
+    });
+});
+</script>
+    <!-- content -->
+    <div id="popup-root" data-catalog_id=""></div>
+        <main id="content">
+            <div id="sub-header" data-title="로그인">
+        <script src="https://canvas.cau.ac.kr/js/front/sub-header.app.js?version=5.14.0.2"></script>
+    </div>
+    <div class="container xn-login-container xn-integrated-login-container" id="login-container">
+        <div class="row xn-sso-login-row" id="login-input-container">
+            <div class="col-md-6 col-md-offset-3 xn-login-info-container xn-sso-login-info-container">
+                <h3 class="xn-login-info-title">통합 로그인</h3>
+                <div class="xn-sso-login-inner-container">
+                    <a href="https://canvas.cau.ac.kr/xn-sso/gw.php?login_type=standalone&amp;callback_url=https%3A%2F%2Fcanvas.cau.ac.kr%2Flogin%2Fcallback
+" class="form-control xn-common-dark-gray-btn xn-sso-login-btn">
+                        <span class="xn-sso-login-btn-text">학교 계정으로 통합 로그인</span>
+                        <i class="xn-sso-login-btn-icon"></i>
+                    </a>
+                    <div class="xn-sso-login-info">
+                        ※ 재학생이나 교직원의 경우 학교에서 사용하는 계정(id 또는 학번)을 사용하여 로그인할 수 있습니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-md-offset-3 xn-login-info-container xn-general-login-info-container">
+                                <h3 class="xn-login-info-title">일반 로그인</h3>
+
+                <form action="https://canvas.cau.ac.kr/login?type=general" method="post" role="form" class="xn-general-login-form-group" id="login-form">
+                    <input type="hidden" name="_token" value="sMCY8nwfhczXKzPmRqam484AGvLfMIK7QSipDtqo">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="user_login" placeholder="ID" autofocus="autofocus" >
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" autocomplete="off" placeholder="비밀번호">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="type" value="integrated">
+                    </div>
+                    <div class="form-group xn-general-login-btn-container">
+                        <div class="row">
+                            <div class="col xn-login-btn-wrap">
+                                <button type="submit" tabindex="4" class="form-control xn-common-blue-btn xn-login-btn">로그인</button>
+							</div>
+                        </div>
+                    </div>
+                </form>
+                <div class="xn-signup-container">
+                    <span class="xn-signup-info float-left">아직 회원이 아니신가요?</span>
+
+                    <div class="float-right">
+                        <a class="float-right" href="https://canvas.cau.ac.kr/forgot-password">
+                            <span class="xn-signup-btn">비밀번호 찾기<span>
+                        </a>
+                        <a class="float-right" href="https://canvas.cau.ac.kr/accounts/membership" style="margin-right: 10px;">
+                            <span class="xn-signup-btn">회원가입<span>
+                        </a>
+                    </div>
+                </div>
+                
+                                    <div class="xn-social-login">
+            <button type="submit" tabindex="5" class="xn-login-btn xn-social-login-btn google" onclick="callOAuth('google')">
+            <i></i>
+            <span>
+                Google 로그인
+            </span>
+        </button>
+            <button type="submit" tabindex="5" class="xn-login-btn xn-social-login-btn facebook" onclick="callOAuth('facebook')">
+            <i></i>
+            <span>
+                Facebook 로그인
+            </span>
+        </button>
+            <button type="submit" tabindex="5" class="xn-login-btn xn-social-login-btn kakao" onclick="callOAuth('kakao')">
+            <i></i>
+            <span>
+                Kakao 로그인
+            </span>
+        </button>
+    
+</div>
+<form action="/login/oauth" method="post" id="oauth-login-form">
+    <input type="hidden" name="_token" value="sMCY8nwfhczXKzPmRqam484AGvLfMIK7QSipDtqo">
+    <input type="hidden" name="user_id_of_provider" />
+    <input type="hidden" name="provider" />
+    <input type="hidden" name="email" />
+    <input type="hidden" name="raw_data" />
+</form>
+
+<script>
+    let oauthRef = null;
+    function callOAuth(provider) {
+        oauthRef = window.open(`/login/${provider}`, '_blank');
+    }
+
+    $(window).on("message", function(event) {
+        if (
+            !event ||
+            !event.originalEvent ||
+            !event.originalEvent.data ||
+            event.originalEvent.data.type !== 'oauth-callback'
+        ) return;
+        
+        oauthRef.close()
+
+        const provider = event.originalEvent.data.value.provider;
+        const response = event.originalEvent.data.value.response;
+
+        if (event.originalEvent.data.value.isFailed) {
+			// 팝업이 닫히고 alert이 뜰 수 있게끔 비동기화 한다.
+			setTimeout(() => alert("오류가 발생하였습니다. 다시 시도해주세요."), 0);
+			return;
+		}
+
+        fetch(`/api/v1/oauth/${provider}/id/${response.id}/exist`)
+            .then(res => {
+                if (res.ok) return res.json();
+
+                throw res;
+            })
+            .then(alreadyExist => {
+                const form = document.getElementById("oauth-login-form");
+                form.user_id_of_provider.value = response.id;
+                form.provider.value = provider;
+                form.email.value = response.email;
+                form.raw_data.value = JSON.stringify(response);
+
+                if (!alreadyExist) {
+                    form.action = '/accounts/membership'
+                }
+
+                form.submit();
+            })
+            .catch(_ => {
+                alert("오류가 발생하였습니다. 다시 시도해주세요.");
+            })
+    });
+</script>
+                            </div>
+        </div>
+    </div>
+        
+    <style
+>#login-input-container {
+    margin-top: 20px;
+}
+</style>
+
+    </main>
+        <!-- footer -->
+    <!-- footer -->
+<footer id="footer">
+    <div class="xn-main-catalog-footer-upper">
+        <!--<ul class="footer_link">
+	<li style="padding-left:0px;background:none;">
+		<a href="https://www.cau.ac.kr/cms/FR_CON/index.do?MENU_ID=2300" target="_blank" style="color:#7db7ff; font-weight: bold;">개인정보처리방침</a>
+	</li>
+	<li><a href="https://www.cau.ac.kr/cms/FR_CON/index.do?MENU_ID=730" target="_blank">이메일수집거부</a></li>
+</ul>-->
+        <div class="xn-change_language-container">
+    <span class="xn-change_language-title">언어</span>
+        <div class="xn-change_language-select_box" onclick="handleToggleDropdown(this)">
+        <span>한국어 (ko)</span>
+        <i></i>
+    </div>
+    <div class="xn-change_language-select_dropdown">
+        <button class="xn-change_language-select_dropdown-item" onclick="setLocale('ko')">
+            한국어 (ko)
+        </button>
+        <button class="xn-change_language-select_dropdown-item" onclick="setLocale('en')">
+            English (en)
+        </button>
+    </div>
+    </div>
+
+<script>
+    function handleToggleDropdown(element) {
+        const parentElement = element.parentElement;
+        const dropdownElement = parentElement.querySelector(".xn-change_language-select_dropdown");
+        dropdownElement.classList.toggle('show');
+    }
+    
+    async function setLocale(locale) {
+        if (locale === 'ko') return null;
+
+        const res = await fetch(`/api/v1/language/${locale}`);
+
+        if (res.ok) {
+            return document.location.reload();
+        }
+
+        alert("언어 변경에 실패하셨습니다.");
+    }
+</script>    </div>
+    <div class="xn-main-catalog-footer-border"></div>
+    <div class="xn-main-catalog-footer-info">
+        <a href="https://canvas.cau.ac.kr">
+            <div class="xn-main-footer-logo">
+                <img class="xn-main-footer-logo-image" alt="중앙대학교 CAU-ON" src="https://canvas.cau.ac.kr/customs/main/footer_logo.png" />
+            </div>
+        </a>
+        <span class="xn-main-footer-copyright"><div class="xnca_footer">
+     <div class="xnca-inner-box">
+          <div class="f_logo"></div>
+          <div class="f_address">
+               <div class="f_link">
+                    <a href="https://www.cau.ac.kr/cms/FR_CON/index.do?MENU_ID=2300" target="_blank">개인정보처리방침</a>
+                    <a href="https://www.cau.ac.kr/cms/FR_CON/index.do?MENU_ID=730" target="_blank">이메일무단수집거부</a>
+               </div>
+               <div class="f_add">
+                    <p>서울캠퍼스 : 06974 서울특별시 동작구 흑석로 84 TEL. 02)820-5114/6114<br>
+안성캠퍼스 : 17546 경기도 안성시 대덕면 서동대로 4726 TEL. 031)670-3114/4114</p>
+                    <p>COPYRIGHT ⓒ 2018 CHUNG-ANG UNIVERSITY. ALL RIGHTS RESERVED.</p>
+               </div>
+          </div>
+            <div class="f_familysite">
+                   <div class="fs_btn">패밀리사이트</div>
+                   <div class="fs_list">
+                   <a href="https://www.cau.ac.kr/index.do" target="_blank">중앙대학교</a>
+                    <a href="https://mportal.cau.ac.kr/system/share/plf/index.do" target="_blank">공유대학플랫폼</a>
+                    </div>
+          </div>
+     </div>
+</div></span>
+    </div>
+</footer>
+</body>
+</html>

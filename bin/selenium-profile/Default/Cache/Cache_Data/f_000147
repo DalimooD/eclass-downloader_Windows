@@ -1,0 +1,627 @@
+<!-- UniPlayer 스킨 시작 -->
+<div id="uni-player">
+	<!-- 콘텐츠 메타데이터 표시 -->
+	<div id="content-metadata">
+		<div class="vc-content-meta-container non-selectable">
+			<div class="vc-content-meta-title">
+				<span class="vc-content-meta-title-text"></span>
+			</div>
+			<div class="vc-content-meta-chapter-btn" tabindex="3"></div>
+			<div class="vc-content-meta-info-btn" tabindex="2"></div>
+			<div class="vc-content-meta-share-btn" tabindex="1"></div>
+		</div>
+	</div>
+
+	<!-- 콘텐츠 정보 표시 -->
+	<div id="content-metadata-info">
+		<div class="content-metadata-info-wrapper">
+			<div class="vc-content-meta-info-box">
+				<div class="vc-content-meta-info-top">
+					<div class="vc-content-meta-info-top-text">Information</div>
+					<div class="vc-content-meta-info-btn-close"></div>
+				</div>
+				<div class="vc-content-meta-info-middle">
+					<div class="vc-content-meta-info-title"></div>
+					<div class="vc-content-meta-info-duration"></div>
+					<div class="vc-content-meta-info-author-name"></div>
+				</div>
+				<div class="vc-content-meta-info-bottom">
+					<div class="vc-content-meta-info-summary"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 시작 썸네일 및 버튼 표시 --> 
+	<div id="front-screen">
+		<div class="vc-front-screen-container non-selectable">
+			<!-- 썸네일 표시 -->
+			<div class="vc-front-screen-thumbnail-container">
+				<img class="vc-front-screen-thumbnail"></img>
+			</div>
+			<div class="vc-front-screen-btn-container">
+				<div class="vc-front-screen-btn-wrapper video1-btn">
+					<div class="vc-front-screen-play-btn" tabindex="13"></div>
+				</div>
+				<div class="vc-front-mixed-btn-wrapper mixed-video-btn">
+					<div class="vc-front-mixed-play-btn" tabindex="14"></div>
+					<div class="vc-front-multi-play-btn" tabindex="15"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Player -->
+	<div id="player">
+		<!-- Audio Player 시작 -->
+		<div id="audio-player">
+			<div id="audio-play-wrapper">
+				<div id="audio-play">
+					<div class="vc-audio-background-container">
+						<div class="vc-audio-background-wrapper">
+							<div class="vc-audio-background"></div>
+						</div>
+					</div>
+					<div class="vc-aplay-container non-selectable">
+						<audio class="vc-aplay-audio"></audio>
+					</div>
+					<div class="vc-aplay-container-flash-fallback non-selectable">
+						<div class="vc-aplay-audio vc-aplay-audio-flash-fallback">
+							<div id="audio-main-flash-fallback"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<!-- Audio Player 끝 -->
+
+		<!-- Video Player 시작 -->
+		<div id="video-player">
+			<div id="video-play-wrapper">
+				<!-- Video1 Play Component -->
+				<div id="video-play-video1">
+					<div class="vc-vplay-container non-selectable">
+						<video class="vc-vplay-video1"></video>
+					</div>
+					<div class="vc-vplay-container-flash-fallback non-selectable">
+						<div class="vc-vplay-video1 vc-vplay-video1-flash-fallback">
+							<div id="video1-main-flash-fallback"></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Video2 Play Component -->
+				<div id="video-play-video2">
+					<div class="vc-vplay-container non-selectable">
+						<div class="vc-vplay-left-video-container">
+							<video class="vc-vplay-video2"></video>
+						</div>
+						<div class="vc-vplay-right-video-container">
+							<video class="vc-vplay-video1"></video>
+						</div>
+					</div>
+					<div class="vc-vplay-container-flash-fallback non-selectable">
+						<div class="vc-vplay-left-video-container-flash-fallback">
+							<div class="vc-vplay-video2 vc-vplay-video2-flash-fallback">
+								<div id="video2-sub-flash-fallback"></div>
+							</div>
+						</div>
+						<div class="vc-vplay-right-video-container-flash-fallback">
+							<div class="vc-vplay-video1 vc-vplay-video1-flash-fallback">
+								<div id="video2-main-flash-fallback"></div>
+							</div>
+						</div>
+					</div>
+					<div class="vc-vplay-video-separator"></div>
+					<div class="vc-vplay-layout-set-box">
+						<div class="vc-vplay-layout-btn" id="vc-vplay-layout-1"/>
+						<div class="vc-vplay-layout-btn" id="vc-vplay-layout-2"/>
+						<div class="vc-vplay-layout-btn" id="vc-vplay-layout-3"/>
+						<div class="vc-vplay-layout-btn" id="vc-vplay-layout-4"/>
+						<div class="vc-vplay-layout-btn" id="vc-vplay-layout-swap"/>
+					</div>
+
+				</div>
+
+				<!-- Video3 Play Component -->
+				<div id="video-play-video3">
+
+					<div class="vc-vplay-container non-selectable">
+						<div class="vc-vplay-left-video-container">
+							<video class="vc-vplay-video2"></video>
+							<div class="vc-vplay-video-btns-wrapper vc-btn-below-top-bar">
+								<div class="vc-vplay-media-close-btn"></div>
+							</div>
+						</div>
+						<div class="vc-vplay-right-video-container">
+							<div class="vc-vplay-right-top-video-container">
+								<video class="vc-vplay-video1"></video>
+								<div class="vc-vplay-video-btns-wrapper vc-btn-below-top-bar">
+									<div class="vc-vplay-media-exchange-btn"></div>
+									<div class="vc-vplay-media-close-btn"></div>
+								</div>
+							</div>
+							<div class="vc-vplay-right-bottom-video-container">
+								<video class="vc-vplay-video3"></video>
+								<div class="vc-vplay-video-btns-wrapper">
+									<div class="vc-vplay-media-exchange-btn"></div>
+									<div class="vc-vplay-media-close-btn"></div>
+								</div>
+							</div>
+						</div>
+						<div class="vc-vplay-video-separator"></div>
+					</div>
+
+					<div class="vc-vplay-container-flash-fallback non-selectable">
+						<div class="vc-vplay-left-video-container-flash-fallback">
+							<div class="vc-vplay-video2 vc-vplay-video2-flash-fallback">
+								<div id="video3-sub-flash-fallback"></div>
+							</div>
+							<div class="vc-vplay-video-btns-wrapper vc-btn-below-top-bar">
+								<div class="vc-vplay-media-close-btn"></div>
+							</div>
+						</div>
+						<div class="vc-vplay-right-video-container-flash-fallback">
+							<div class="vc-vplay-right-top-video-container-flash-fallback">
+								<div class="vc-vplay-video1 vc-vplay-video1-flash-fallback">
+									<div id="video3-main-flash-fallback"></div>
+								</div>
+								<div class="vc-vplay-video-btns-wrapper vc-btn-below-top-bar">
+									<div class="vc-vplay-media-close-btn"></div>
+								</div>
+							</div>
+							<div class="vc-vplay-right-bottom-video-container-flash-fallback">
+								<div class="vc-vplay-video3 vc-vplay-video3-flash-fallback">
+									<div id="video3-extra-flash-fallback"></div>
+								</div>
+								<div class="vc-vplay-video-btns-wrapper">
+									<div class="vc-vplay-media-close-btn"></div>
+								</div>
+							</div>
+						</div>
+						<div class="vc-vplay-video-separator"></div>
+					</div>
+				</div>
+
+				<!-- Video4 Play Component -->
+				<div id="video-play-video4">
+
+					<div class="vc-vplay-container non-selectable">
+						<div class="vc-vplay-left-video-container">
+							<video class="vc-vplay-video2"></video>
+							<div class="vc-vplay-video-btns-wrapper vc-btn-below-top-bar">
+								<div class="vc-vplay-media-close-btn"></div>
+							</div>
+						</div>
+						<div class="vc-vplay-right-video-container">
+							<div class="vc-vplay-right-top-video-container">
+								<video class="vc-vplay-video1"></video>
+								<div class="vc-vplay-video-btns-wrapper vc-btn-below-top-bar">
+									<div class="vc-vplay-media-exchange-btn"></div>
+									<div class="vc-vplay-media-close-btn"></div>
+								</div>
+							</div>
+							<div class="vc-vplay-right-middle-video-container">
+								<video class="vc-vplay-video3"></video>
+								<div class="vc-vplay-video-btns-wrapper">
+									<div class="vc-vplay-media-exchange-btn"></div>
+									<div class="vc-vplay-media-close-btn"></div>
+								</div>
+							</div>
+							<div class="vc-vplay-right-bottom-video-container">
+								<video class="vc-vplay-video4"></video>
+								<div class="vc-vplay-video-btns-wrapper">
+									<div class="vc-vplay-media-exchange-btn"></div>
+									<div class="vc-vplay-media-close-btn"></div>
+								</div>
+							</div>
+						</div>
+						<div class="vc-vplay-video-separator"></div>
+					</div>
+
+					<div class="vc-vplay-container-flash-fallback non-selectable">
+						<div class="vc-vplay-left-video-container-flash-fallback">
+							<div class="vc-vplay-video2 vc-vplay-video2-flash-fallback">
+								<div id="video4-sub-flash-fallback"></div>
+							</div>
+							<div class="vc-vplay-video-btns-wrapper vc-btn-below-top-bar">
+								<div class="vc-vplay-media-close-btn"></div>
+							</div>
+						</div>
+						<div class="vc-vplay-right-video-container-flash-fallback">
+							<div class="vc-vplay-right-top-video-container-flash-fallback">
+								<div class="vc-vplay-video1 vc-vplay-video1-flash-fallback">
+									<div id="video4-main-flash-fallback"></div>
+								</div>
+								<div class="vc-vplay-video-btns-wrapper vc-btn-below-top-bar">
+									<div class="vc-vplay-media-close-btn"></div>
+								</div>
+							</div>
+							<div class="vc-vplay-right-middle-video-container-flash-fallback">
+								<div class="vc-vplay-video3 vc-vplay-video3-flash-fallback">
+									<div id="video4-extra-flash-fallback"></div>
+								</div>
+								<div class="vc-vplay-video-btns-wrapper">
+									<div class="vc-vplay-media-close-btn"></div>
+								</div>
+							</div>
+							<div class="vc-vplay-right-bottom-video-container-flash-fallback">
+								<div class="vc-vplay-video4 vc-vplay-video3-flash-fallback">
+									<div id="video4-extra2-flash-fallback"></div>
+								</div>
+								<div class="vc-vplay-video-btns-wrapper">
+									<div class="vc-vplay-media-close-btn"></div>
+								</div>
+							</div>
+						</div>
+						<div class="vc-vplay-video-separator"></div>
+					</div>
+				</div>
+
+				<!-- Audio유형 프로필을 재생할 때 사용하는 것 -->
+				<div id="video-play-audio-mode">
+					<div class="vc-audio-background-container">
+						<div class="vc-audio-background-wrapper">
+							<div class="vc-audio-background"></div>
+						</div>
+					</div>
+					<audio class ="vc-vplay-audio-mode-audio"></audio>
+				</div>
+			</div>
+		</div> 
+		<!-- Video Player 끝 -->
+
+		<!-- SyncDoc Player 시작 -->
+		<div id="syncdoc-player">
+			<div id="syncdoc-play-wrapper">
+				<!-- SyncVideo Play Component -->
+				<div id="syncvideo-play">
+					<div class="vc-sdplay-container non-sectable">
+						<div class="vc-sdplay-video">
+							<div class="vc-sdvideo-container non-selectable">
+								<video class="vc-sdvideo-video"></video>
+							</div>
+							<div class="vc-sdvideo-container-flash-fallback non-selectable">
+								<div id="vc-sdvideo-video-flash-fallback"></div>
+							</div>
+						</div>
+						<div class="vc-sdplay-slide">
+							<div class="vc-slide-container non-selectable">
+								<div class="vc-slide-area"></div>
+							</div>
+						</div>
+						<div class="vc-sdplay-note">
+							<div id="vc-sdvideo-note-flash-fallback"></div>
+						</div>
+						<div class="vc-sdplay-separator"></div>
+						<div class="vc-sdplay-layout-set-box">
+							<div class="vc-sdplay-layout-btn" id="vc-sdplay-layout-1"/>
+							<div class="vc-sdplay-layout-btn" id="vc-sdplay-layout-2"/>
+							<div class="vc-sdplay-layout-btn" id="vc-sdplay-layout-3"/>
+							<div class="vc-sdplay-layout-btn" id="vc-sdplay-layout-4"/>
+							<div class="vc-sdplay-layout-btn" id="vc-sdplay-layout-swap"/>
+						</div>
+						<audio class="vc-sdaudio-audio"></audio>
+					</div>
+				</div>
+
+				<!-- SyncAudio Play Component -->
+				<div id="syncaudio-play">
+					<div class="vc-sdplay-container non-selectable">
+						<div class="vc-sdplay-audio" id="vc-sdplay-audio">
+							<div class="vc-sdaudio-container non-selectable">
+								<audio class="vc-sdaudio-audio"></audio>
+							</div>
+							<div class="vc-sdaudio-container-flash-fallback non-selectable">
+								<div id="vc-sdaudio-audio-flash-fallback"></div>
+							</div>
+						</div>
+						<div class="vc-sdplay-slide-for-audio">
+							<div class="vc-slide-container non-selectable">
+								<div class="vc-slide-area"></div>
+								<div class="vc-slide-sync-btn vc-slide-syncing-mode"></div>
+							</div>
+						</div>
+						<div class="vc-sdplay-note">
+							<div id="vc-sdaudio-note-flash-fallback"></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- SyncDoc Controller -->
+				<div class="vc-slide-controller">
+					<!-- Document Sync On/Off Button-->
+					<div class="vc-slide-sync-btn-wrapper vc-floating-btn-wrapper">
+						<div class="vc-slide-sync-btn vc-slide-syncing-mode vc-floating-btn"></div>
+					</div>
+					<!-- Document Paging -->
+					<div class="vc-slide-paging-over-layer vc-over-layer">
+						<div class="vc-slide-paging-container">
+							<div class="vc-slide-paging">
+								<div class="vc-btn vc-slide-prev-page-btn"></div>
+								<div class="vc-btn vc-slide-next-page-btn"></div>
+								<span class="vc-slide-page-display">
+									<span class="vc-slide-curr-page"></span>
+									<span class="vc-slide-page-separator">/</span>
+									<span class="vc-slide-total-page"></span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<!-- Document Floating Controls -->
+					<div class="vc-slide-floating-controls-over-layer vc-over-layer">
+						<div class="vc-slide-floating-controls-container">
+							<div class="vc-slide-floating-controls">
+								<div class="vc-slide-custom-scale-btn-wrapper vc-floating-btn-wrapper">
+									<div class="vc-floating-btn vc-slide-fit-to-page-btn"></div>
+									<div class="vc-floating-btn vc-slide-fit-to-width-btn"></div>
+								</div>
+								<div class="vc-slide-zoom-in-btn-wrapper vc-floating-btn-wrapper">
+									<div class="vc-floating-btn vc-slide-zoom-in-btn"></div>
+								</div>
+								<div class="vc-slide-zoom-out-btn-wrapper vc-floating-btn-wrapper">
+									<div class="vc-floating-btn vc-slide-zoom-out-btn"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+		<!-- SyncDoc Player 끝 -->
+
+		<!-- Flash Fallback script -->
+		<script type="text/javascript" nonce="82b6e41fe3114fffaaec029d643" src="//local.adguard.org?ts=1744945197186&amp;type=content-script&amp;dmn=ocs.cau.ac.kr&amp;url=https%3A%2F%2Focs.cau.ac.kr%2Fviewer%2Funiplayer_skins%2Fdefault%2Fdesktop%2Fcommon%2Funi-player-skin.html%3F_%3D1744958645952&amp;app=chrome.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script>
+<script type="text/javascript" nonce="82b6e41fe3114fffaaec029d643" src="//local.adguard.org?ts=1744945197186&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script><script>
+			function isJavascriptReady() {
+			    return true;
+			}
+			function fallbackReady(objectId) {
+				if (contentPlayer != null)
+					contentPlayer.onFallbackReady(objectId);
+			}
+			function onMetadataLoaded(objectId) {
+				if (contentPlayer != null)
+					contentPlayer.onMetadataLoaded(objectId);
+			}
+			function onStatusChange(objectId, status) {
+				if (contentPlayer != null)
+					contentPlayer.onStatusChange(objectId, status);
+			}
+			function onTimeUpdate(objectId, time) {
+				if (contentPlayer != null)
+					contentPlayer.onTimeUpdate(objectId, time);
+			}
+			function noteFallbackReady(objectId) {
+				if (noteManager != null)
+					noteManager.noteFallbackReady(objectId);
+			}
+			function onNoteParseCompleted(objectId) {
+				if (noteManager != null)
+					noteManager.onNoteParseCompleted(objectId);	
+			}
+			function onNoteLog(objectId, log) {
+				// console.log(log);
+			}
+		</script>
+	</div>
+
+	<!-- 자막 -->
+	<div id="closed-caption">
+		<div class="vc-cc-container non-selectable">
+			<div class="vc-cc-caption">
+			</div>
+		</div>
+	</div>
+
+	<!-- MediaScript 표시 -->
+	<div id="media-script">
+		<div class="vc-media-script-header">
+			<div class="vc-media-script-header-title"></div>
+		</div>
+		<div class="vc-media-script-content"></div>
+	</div>
+
+	<!-- 세로형 목차 -->
+	<div id="chapter-vertical">
+		<div class="vc-chapter-container-vertical non-selectable">
+			<div class="vc-top-item">
+				<span class="vc-top-item-name">TOC</span>
+				<span class="vc-top-item-total"></span>
+			</div>
+			<ol class="vc-chapter-list-vertical">
+			</ol>
+		</div>
+
+		<!-- 세로형 목차 아이템 템플릿 Thumbnail 형 -->
+		<script id="vc-chapter-item-vertical-tmpl-thumbnail" type="text/x-jsrender">
+		{{if isStory}}
+			<li id={{:itemId}} class="vc-story-item-vertical">
+				<div class="vc-story-item-description-vertical">
+					<span class="vc-story-item-description-text-vertical">{{>description}}</span>
+				</div>
+			</li>
+		{{/if}}
+
+		{{if !isStory}}
+			<li id={{:itemId}} class="vc-chapter-item-vertical">
+				<div class="vc-chapter-item-thumb-box-vertical">
+					<div class="vc-chapter-item-thumb-vertical" 
+				     style="background-image: url('{{:thumbUrl}}');"/>
+				     <div class="vc-chapter-item-time-vertical">
+						<div class="vc-chapter-item-time-text-vertical">{{:time}}</div>
+					</div>
+				</div>
+				<div class="vc-chapter-item-description-vertical">
+					<span class="vc-chapter-item-description-text-vertical">{{>description}}</span>
+				</div>
+			</li>
+		{{/if}}
+		</script>
+
+		<!-- 세로형 목차 아이템 템플릿 Text 형 -->
+		<script id="vc-chapter-item-vertical-tmpl-text" type="text/x-jsrender">
+		{{if isStory}}
+			<li id={{:itemId}} class="vc-story-item-vertical">
+				<div class="vc-story-item-description-vertical">
+					<span class="vc-story-item-description-text-vertical">{{>description}}</span>
+				</div>
+			</li>
+		{{/if}}
+
+		{{if !isStory}}
+			<li id={{:itemId}} class="vc-chapter-item-vertical">
+				<div class="vc-chapter-item-vertical-container">
+					<div class="vc-chapter-item-selected-icon-vertical"></div>
+					<div class="vc-chapter-item-description-vertical">
+						<span class="vc-chapter-item-description-text-vertical">{{>description}}</span>
+					</div>
+					<div class="vc-chapter-item-time-vertical">
+						<div class="vc-chapter-item-time-text-vertical">{{:time}}</div>
+					</div>
+				</div>
+			</li>
+		{{/if}}
+		</script>
+	</div>
+
+	<!-- 가로형 목차 -->
+	<div id="chapter-horizontal">
+		<div class="vc-chapter-container-horizontal non-selectable">
+			<div class="vc-chapter-list-wrapper-horizontal">
+				<div class="vc-chapter-list-horizontal"></div>
+			</div>
+			<div class="vc-chapter-left-btn-horizontal"></div>
+			<div class="vc-chapter-right-btn-horizontal"></div>
+		</div>
+		<!-- Chapter를 가릴 때 사용 되는 투명판 -->
+		<div class="vc-chapter-transparent-mask-horizontal"></div> 
+
+		<!-- 가로형 목차 아이템 템플릿 -->
+		<script id="vc-chapter-item-horizontal-tmpl" type="text/x-jsrender">
+			<div id={{:itemId}} class="vc-chapter-item-horizontal">
+				<div class="vc-chapter-item-thumb-container">
+					<div class="vc-chapter-item-thumb-horizontal" 
+					     style="background-image: url('{{:thumbUrl}}');">
+					</div>
+					<div class="vc-chapter-item-time-horizontal">
+						<span class="vc-chapter-item-time-text-horizontal">
+							{{:time}}
+						</span>
+					</div>
+				</div>
+				<div class="vc-chapter-item-index-horizontal">
+					{{:index}}
+				</div>
+			</div>
+		</script>
+	</div>
+
+	<!-- 재생 컨트롤러 -->
+	<div id="play-controller">
+		<div class="vc-pctrl-container non-selectable">
+			<div class="vc-pctrl-wrapper">
+				<div class="vc-pctrl-time-tracker">
+					<div class="vc-pctrl-load-progress" />
+					<div class="vc-pctrl-seek-limit-progress"/>
+					<div class="vc-pctrl-play-progress" />
+					<div class="vc-pctrl-intro-play-progress" />
+					<div class="vc-pctrl-seek-thumb" />
+				</div>
+				<div class="vc-pctrl-buttons-bar">
+					<div class="vc-pctrl-play-pause-btn vc-pctrl-on-pause" tabindex="4"/>
+					<div class="vc-pctrl-restart-btn" tabindex="16" />
+					<div class="vc-pctrl-volume-hover-area">
+						<div class="vc-pctrl-volume-btn" tabindex="5" />
+						<div class="vc-pctrl-volume-setting-panel">
+							<div class="vc-pctrl-volume-slider">
+								<div class="vc-pctrl-volume-gauge"/>
+								<div class="vc-pctrl-volume-thumb"/>
+							</div>
+							<div class="vc-pctrl-volume-size-bar"/>
+						</div>
+					</div>
+
+					<div class="vc-pctrl-play-time-text-area">
+						<span class="vc-pctrl-curr-time">00:00</span>
+						<span class="vc-pctrl-time-separator">/</span>
+						<span class="vc-pctrl-total-duration">00:00</span>
+					</div>
+					
+					<button class="vc-pctrl-fullscreen-btn vc-pctrl-on-normal-screen" tabindex="12"></button>
+					<div class="vc-pctrl-chapter-btn" tabindex="11"></div>
+					<div class="vc-pctrl-caption-script-btn vc-pctrl-caption-script-off" tabindex="10"></div>
+					<div class="vc-pctrl-media-script-btn vc-pctrl-media-script-off" tabindex="10"></div>
+					<div class="vc-pctrl-cc-btn vc-pctrl-cc-off" tabindex="9"/>
+					<div class="vc-pctrl-cc-set-box"></div>
+					<div class="vc-pctrl-profile-toggle-btn" tabindex="8"></div>
+					<div class="vc-pctrl-profile-setbox"></div>
+					<div class="vc-pctrl-playback-rate-toggle-btn" tabindex="7">x 1.0</div>
+					<div class="vc-pctrl-playback-rate-setbox">
+					</div>
+					<div class="vc-pctrl-playback-unavailable-msg">
+						<div class="vc-pctrl-playback-unavailable-msg-wrapper">
+							<div class="vc-pctrl-playback-unavailable-msg-box">
+								<div class="vc-pctrl-playback-unavailable-msg-text"></div>
+							</div>
+						</div>
+					</div>
+					<div class="vc-pctrl-fullscreen-unavailable-msg">
+						<div class="vc-pctrl-fullscreen-unavailable-msg-wrapper">
+							<div class="vc-pctrl-fullscreen-unavailable-msg-box">
+								<div class="vc-pctrl-fullscreen-unavailable-msg-text"></div>
+							</div>
+						</div>
+					</div>
+                    <div class="vc-pctrl-caption-unavailable-msg">
+                        <div class="vc-pctrl-caption-unavailable-msg-wrapper">
+                            <div class="vc-pctrl-caption-unavailable-msg-box">
+                                <div class="vc-pctrl-caption-unavailable-msg-text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+					<div class="vc-pctrl-mixed-multi-btn vc-pctrl-on-mixed" tabindex="18"></div>
+					<div class="vc-pctrl-reload-player-btn" tabindex="6"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 중복 시청 경고 -->
+	<div id="warn-duplicate-contents-msg">
+        <div class="warn-duplicate-contents-msg-wrapper">
+            <div class="warn-duplicate-contents-msg-box">
+                <div class="warn-duplicate-contents-msg-text">
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<!-- 다시 재생 버튼 -->
+	<div id="player-center-control">
+		<div class="player-center-control-wrapper">
+			<div class="player-restart-btn" tabindex="16"></div>
+		</div>
+	</div>
+
+	<!-- 로딩중 표시 -->
+	<div id="loading-indicator">
+		<div id="loading-indicator-gif-fallback"></div>
+	</div>
+
+	<!-- confirm 메세지 창-->
+	<div id="confirm-dialog">
+		<div class="confirm-dialog-wrapper">
+			<div class="confirm-msg-box">
+				<div class="confirm-msg-text"></div>
+				<div class="confirm-btn-wrapper">
+					<div class="confirm-ok-btn confirm-btn"></div>
+					<div class="confirm-cancel-btn confirm-btn"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- UniPlayer 스킨 끝 -->

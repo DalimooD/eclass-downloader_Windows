@@ -1,0 +1,4 @@
+bin/cookies.json
+*.mp4
+*.txt
+__pycache__/
